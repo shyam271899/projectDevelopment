@@ -5,6 +5,8 @@ import com.awt.signin.signin.entity.Registration;
 import com.awt.signin.signin.repository.RegistrationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,15 +20,15 @@ public class RegistrationController {
     RegistrationRepository registrationRepo;
 
     @PostMapping("/Users")
-    public String saveRegistration(@RequestBody Registration usersData) {
+    public ResponseEntity<?> saveRegistration(@RequestBody Registration usersData) {
 
         Registration byEmail = registrationRepo.findByEmail(usersData.getEmail());
 
         if (byEmail == null) {
             registrationRepo.save(usersData);
-            return "Data Saved Successfully";
+            return ResponseEntity.ok("Data Saved Successfully");
         } else {
-            return "Email already exists";
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Email already exists");
         }
     }
 

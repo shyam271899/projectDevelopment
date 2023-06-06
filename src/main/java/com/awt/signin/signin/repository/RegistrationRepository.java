@@ -12,4 +12,5 @@ public interface RegistrationRepository extends JpaRepository<Registration, Long
     Registration findByEmail(String email);
 
 
+    Registration findByPassword(String password);
 }
