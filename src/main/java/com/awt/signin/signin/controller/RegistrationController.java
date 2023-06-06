@@ -1,8 +1,8 @@
 package com.awt.signin.signin.controller;
 
 
-import com.awt.signin.signin.entity.Users;
-import com.awt.signin.signin.repository.RegistrationRepo;
+import com.awt.signin.signin.entity.Registration;
+import com.awt.signin.signin.repository.RegistrationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,15 +14,21 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/reg")
 public class RegistrationController {
 
-	@Autowired
-	RegistrationRepo registrationRepo;
+    @Autowired
+    RegistrationRepository registrationRepo;
 
-	@PostMapping("/Users")
-	public String saveRegistration(@RequestBody Users usersData) {
+    @PostMapping("/Users")
+    public String saveRegistration(@RequestBody Registration usersData) {
 
-		registrationRepo.save(usersData);
-		return "Data Saved Successfully";
-	}
+        Registration byEmail = registrationRepo.findByEmail(usersData.getEmail());
 
-	
+        if (byEmail == null) {
+            registrationRepo.save(usersData);
+            return "Data Saved Successfully";
+        } else {
+            return "Email already exists";
+        }
+    }
+
+
 }
