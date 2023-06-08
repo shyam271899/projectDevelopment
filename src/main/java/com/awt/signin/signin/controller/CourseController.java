@@ -16,12 +16,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class CourseController {
 	
 	@Autowired
-	CoursesRepository courserepo;
+	CoursesRepository coursesRepository;
 	
 	@GetMapping("/courses")
 	public List<Courses> getAllCourses()
 	{
-		return courserepo.findAll();
+		return coursesRepository.findAll();
 		
 	}
 

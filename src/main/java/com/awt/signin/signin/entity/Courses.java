@@ -9,7 +9,6 @@ import lombok.Data;
 public class Courses {
 	
 	@Id
-	//@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long course_id;
 	
 	private String courseName;

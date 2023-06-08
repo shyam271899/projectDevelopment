@@ -17,15 +17,15 @@ import org.springframework.web.bind.annotation.RestController;
 public class RegistrationController {
 
     @Autowired
-    RegistrationRepository registrationRepo;
+    RegistrationRepository registrationRepository;
 
     @PostMapping("/Users")
     public ResponseEntity<?> saveRegistration(@RequestBody Registration usersData) {
 
-        Registration byEmail = registrationRepo.findByEmail(usersData.getEmail());
+        Registration byEmail = registrationRepository.findByEmail(usersData.getEmail());
 
         if (byEmail == null) {
-            registrationRepo.save(usersData);
+            registrationRepository.save(usersData);
             return ResponseEntity.ok("Data Saved Successfully");
         } else {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Email already exists");

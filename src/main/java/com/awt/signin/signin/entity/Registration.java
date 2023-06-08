@@ -10,7 +10,7 @@ import lombok.Data;
 @Data
 public class Registration {
 
-     @Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String firstName;
@@ -22,9 +22,8 @@ public class Registration {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
     private String preferredCourses;
-
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String message;
-
 
 
     public Registration() {
