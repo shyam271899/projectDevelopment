@@ -1,6 +1,6 @@
 package com.awt.signin.signin.repository;
 
-import com.awt.signin.signin.entity.Courses;
+import com.awt.signin.signin.entity.Section;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -8,11 +8,9 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface CoursesRepository extends JpaRepository<Courses,Integer>{
 
-    Optional<Courses> findByCourseName(String courseName);
+public interface SectionRepository extends JpaRepository<Section,Integer> {
+    Optional<Section> findBySectionName(String sectionName);
 
-
-
-    Optional<Courses> findByCourseNameIgnoreCase(String courseName);
+    Optional<Section> findBySectionNameIgnoreCase(String sectionName);
 }

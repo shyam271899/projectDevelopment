@@ -2,7 +2,7 @@ package com.awt.signin.signin.controller;
 
 
 import com.awt.signin.signin.entity.Registration;
-import com.awt.signin.signin.entity.ResetPasswordInputs;
+import com.awt.signin.signin.model.ResetPasswordInputs;
 import com.awt.signin.signin.repository.RegistrationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -26,13 +26,13 @@ public class PasswordResetController {
         if (optionalRequest.isPresent()) {
             Registration existingRequest = optionalRequest.get();
 
-            if (!existingRequest.getPassword().equals(request.getOldPassword())) {
+            if (!existingRequest.getUserPassword().equals(request.getOldPassword())) {
                 return ResponseEntity.badRequest().body("Invalid old password");
             }
             else if (request.getNewPassword().equals(request.getOldPassword())) {
                 return ResponseEntity.badRequest().body("Same old and new password");
             }else {
-                existingRequest.setPassword(request.getNewPassword());
+                existingRequest.setUserPassword(request.getNewPassword());
                 registrationRepository.save(existingRequest);
 
                 return ResponseEntity.ok("Password reset successful");
@@ -40,7 +40,7 @@ public class PasswordResetController {
 
         }
         else {
-            return ResponseEntity.ok("User Not Found");
+            return ResponseEntity.ok("Registration Not Found");
         }
     }
 }

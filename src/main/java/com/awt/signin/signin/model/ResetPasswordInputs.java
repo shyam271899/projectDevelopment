@@ -1,4 +1,4 @@
-package com.awt.signin.signin.entity;
+package com.awt.signin.signin.model;
 
 import lombok.Data;
 
